@@ -1,0 +1,103 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title></title>
+</head>
+<body>
+    <div style="width:50%;float:left">
+        <div id="pieArea" style="width: 100%; height: 300px; margin: 0 0 0 0"></div>
+    </div>
+    <div style ="width:50%;float:left" >
+        <div id="piePerson" style="width: 100%; height: 300px; margin: 0 0 0 0"></div>
+    </div>
+</body>
+<script src="js/jquery-2.1.4.min.js"></script>
+<script src="https://js.arcgis.com/3.24/"></script>
+<script src="home/css/easyui/jquery.easyui.min.js"></script>
+<script src="js/echarts.js"></script>
+
+<script>
+    var colCartArea = echarts.init(document.getElementById('pieArea'), 'light');
+    var optionArea;
+    $.ajax({
+        type: "post",
+        url: "business/getAreaByCjbm.ashx",
+        data: { CJQYBM: "37162110422000" },
+        datatype: "json",
+        success: function (data) {
+            var dataJson = eval(data);
+            optionArea = {
+                title: {
+                    text: '流转面积对比',
+
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b} : {c} ({d}%)"
+                },
+                series: [
+                    {
+                        name: '类型',
+                        type: 'pie',
+                        radius: '50%',
+                        center: ['50%', '50%'],
+                        data: dataJson,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            colCartArea.setOption(optionArea);
+        }
+    });
+
+    //var json = [{ name: "邵董季", value: 80685 }, { name: "屈唐计·蓝", value: 95006 }];
+    var colCartPerson = echarts.init(document.getElementById('piePerson'), 'light');
+    var optionPiePerson;
+    $.ajax({
+        type: "post",
+        url: "business/getScaleByCjbm.ashx",
+        data: { CJQYBM: "37162110422000" },
+        datatype: "json",
+        success: function (data) {
+            var dataJson = eval(data);
+            optionPiePerson = {
+                title: {
+                    text: '流转人数对比',
+
+                    x: 'center'
+                },
+                tooltip: {
+                    trigger: 'item',
+                    formatter: "{b} : {c} ({d}%)"
+                },
+                series: [
+                    {
+                        name: '类型',
+                        type: 'pie',
+                        radius: '50%',
+                        center: ['50%', '50%'],
+                        data: dataJson,
+                        itemStyle: {
+                            emphasis: {
+                                shadowBlur: 10,
+                                shadowOffsetX: 0,
+                                shadowColor: 'rgba(0, 0, 0, 0.5)'
+                            }
+                        }
+                    }
+                ]
+            };
+            colCartPerson.setOption(optionPiePerson);
+        }
+    });
+
+</script>
+</html>

@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>惠民县农村土地流转平台</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/3.24/esri/css/esri.css">
+    <script src="https://js.arcgis.com/3.24/"></script>
+    <script src="js/map.js"></script>
+    <script src="js/map_window.js"></script>
+    <link href="js/easyui/themes/default/easyui.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="css/easyui/themes/icon.css">
+    <link href="css/table.css" rel="stylesheet" />
+    <script type="text/javascript" src="css/easyui/jquery.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="js/easyui/jquery.easyui.min.js"></script>
+    <script src="js/easyui/locale/easyui-lang-zh_CN.js"></script>
+</head>
+<body>
+    <div class="easyui-layout" style="width:100%;height:100%;">
+        <div data-options="region:'north'" style="background: url(images/header_4.png);-moz-background-size:100% 100%; background-size:100% 100%;height: 87px;position: relative;"></div>
+
+        <div data-options="region:'east',split:true" title="行政区划" style="width:180px;">
+            <div class="easyui-panel" style="padding:5px;width:180px">
+                <ul id="tree_region" class="easyui-tree" data-options="url:'../database/xing.json',method:'get',animate:true"></ul>
+            </div>
+        </div>
+        <div data-options="region:'west',split:true" title="功能列表" style="width:210px;background-color:#ABC797">
+            <div class="easyui-accordion" data-options="fit:true,border:false,selected:true">
+                <div title="流转信息登记" data-options="selected:true" style="padding:0;">
+                    <button id="dengjibtn" style="width:100%;height:35px;color: #0E2D5F;font-size:15px;font-weight:bold"> 流转信息登记</button>
+                </div>
+                <div title="流转信息管理" style="padding:0px;">
+                    <button id="guanlibtn" style="width:100%;height:35px;color: #0E2D5F;font-size:15px;font-weight:bold"> 流转信息管理</button>
+                </div>
+                <div title="流转信息统计" style="padding:0px">
+                    <button id="zhanshibtn" style="width:100%;height:35px;color: #0E2D5F;font-size:15px;font-weight:bold"> 地图展示</button>
+                    <button id="tongjibtn" style="width:100%;height:35px;color: #0E2D5F;font-size:15px;font-weight:bold"> 信息统计</button>
+                </div>
+                <div title="平台信息管理" style="padding:0px">
+                    <button id="fabubtn" style="width:100%;height:35px;color: #0E2D5F;font-size:15px;font-weight:bold"> 平台信息管理</button>
+                </div>
+            </div>
+        </div>
+        <script>
+            $("#dengjibtn").click(function () {
+                $("#guanli").hide();
+                $("#mapDiv").hide();
+                $("#tongji").hide();
+                $("#fabu").hide();
+                $("#dengji").show();
+            });
+            $("#guanlibtn").click(function () {
+                $("#guanli").show();
+                $("#mapDiv").hide();
+                $("#tongji").hide();
+                $("#fabu").hide();
+                $("#dengji").hide();
+            });
+            $("#zhanshibtn").click(function () {
+                $("#guanli").hide();
+                $("#mapDiv").show();
+                $("#tongji").hide();
+                $("#fabu").hide();
+                $("#dengji").hide();
+            });
+            $("#tongjibtn").click(function () {
+                $("#guanli").hide();
+                $("#mapDiv").hide();
+                $("#tongji").show();
+                $("#fabu").hide();
+                $("#dengji").hide();
+            });
+            $("#fabubtn").click(function () {
+                $("#guanli").hide();
+                $("#mapDiv").hide();
+                $("#tongji").hide();
+                $("#fabu").show();
+                $("#dengji").hide();
+            });
+        </script>
+        <div data-options="region:'center',title:'主窗体',iconCls:'icon-ok'">
+            <div style="position:relative;width:100%;height:100%">
+                <div id="dengji" style="position:absolute;z-index:1;width:100%;height:100%" align="center">
+                    <div style="top:10%;position:relative">
+                        <form>
+                            <table cellpadding="5" style="border:0px">
+                                <tr>
+                                    <td>地块编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="name" id="DKBM" data-options="required:true"></td>
+
+                                    <td>地块类别：</td>
+                                    <td><input class="easyui-textbox" type="text" name="email" id="DKLB" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>地力等级：</td>
+                                    <td><input class="easyui-textbox" type="text" name="subject" id="DLDJ" data-options="required:true"></input></td>
+
+                                    <td>土地用途：</td>
+                                    <td><input class="easyui-textbox" type="text" name="name" id="TDYT" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>承包面积（m^2）：</td>
+                                    <td><input class="easyui-textbox" type="text" name="email" id="CBMJ" data-options="required:true"></input></td>
+
+                                    <td>实测面积（m^2）：</td>
+                                    <td><input class="easyui-textbox" type="text" name="subject" id="SCMJ" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>发包方编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="email" id="FBFBM" data-options="required:true"></input></td>
+
+                                    <td>转出方编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="subject" id="ZCFBM" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>承包经营权证编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="name" id="CBJYQZBM" data-options="required:true"></input></td>
+
+                                    <td>转出方式：</td>
+                                    <td>
+                                        <select class="easyui-combobox" id="LZFS">
+                                            <option value="100">承包</option>
+                                            <option value="110">家庭承包</option>
+                                            <option value="120">其他方式承包</option>
+                                            <option value="121">招标</option>
+                                            <option value="122">拍卖</option>
+                                            <option value="123">公开协商</option>
+                                            <option value="129">其他方式(129)</option>
+                                            <option value="200">转让</option>
+                                            <option value="300">互换</option>
+                                            <option value="900">其他方式(900)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>流转期限开始日期：</td>
+                                    <td>
+                                        <input class="easyui-datebox" id="LZQXKSRQ" data-options="formatter:myformatter,parser:myparser,required:true"></input>
+                                    </td>
+                                    <td>流转期限结束日期：</td>
+                                    <td>
+                                        <input class="easyui-datebox" id="LZQXJSRQ" data-options="formatter:myformatter,parser:myparser,required:true"></input>
+                                    </td>
+                                </tr>
+                                <script type="text/javascript">
+                                    function myformatter(date) {
+                                        var y = date.getFullYear();
+                                        var m = date.getMonth() + 1;
+                                        var d = date.getDate();
+                                        return y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
+                                    }
+                                    function myparser(s) {
+                                        if (!s) return new Date();
+                                        var ss = (s.split('-'));
+                                        var y = parseInt(ss[0], 10);
+                                        var m = parseInt(ss[1], 10);
+                                        var d = parseInt(ss[2], 10);
+                                        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                                            return new Date(y, m - 1, d);
+                                        } else {
+                                            return new Date();
+                                        }
+                                    }
+                                </script>
+                                <tr>
+                                    <td>流转期限：</td>
+                                    <td><input class="easyui-textbox" type="text" name="subject" id="LZQX" data-options="required:true"></input></td>
+
+                                    <td>流转价格：</td>
+                                    <td><input class="easyui-textbox" type="text" name="name" id="LZJG" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>合同签订日期:</td>
+                                    <td>
+                                        <input class="easyui-datebox" id="HTQDRQ" data-options="formatter:myformatter,parser:myparser,required:true"></input>
+                                    </td>
+
+                                    <td>流转合同编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="subject" id="LZHTBM" data-options="required:true"></input></td>
+                                </tr>
+                                <tr>
+                                    <td>受让方编码：</td>
+                                    <td><input class="easyui-textbox" type="text" name="name" id="SRFBM" data-options="required:true"></input></td>
+
+                                </tr>
+                                <tr>
+                                    <td></td>
+                                    <td><a class="easyui-linkbutton" style="width:100px;color: #0E2D5F;font-size:15px;font-weight:bold" id="btn_post">提交</a></td>
+                                    <td></td>
+                                    <td><a class="easyui-linkbutton" style="width:100px;color: #0E2D5F;font-size:15px;font-weight:bold" id="btn_post">重置</a></td>
+
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div id="guanli" style="position:absolute;z-index:2;width:100%;height:100%;display:none">
+                    <table class="mytable" id="tableReporter" style="width:22%;float:left" cellspacing="0" summary="The technical specifications of the Apple PowerMac G5 series"></table>
+                    <div style="width:78%;overflow:hidden">
+                        <form>
+                            <table  class="mytable" cellpadding="5" style="border:0px;width:100%">
+                                <tr>
+                                    <td>地块编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="name" id="DKBM1" data-options="readonly:true" ></td>
+
+                                    <td>地块类别：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="email" id="DKLB1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>地力等级：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="subject" id="DLDJ1" data-options="readonly:true"></td>
+
+                                    <td>土地用途：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="name" id="TDYT1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>承包面积（m^2）：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="email" id="CBMJ1" data-options="readonly:true"></td>
+
+                                    <td>实测面积（m^2）：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="subject" id="SCMJ1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>发包方编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="email" id="FBFBM1" data-options="readonly:true"></td>
+
+                                    <td>转出方编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="subject" id="ZCFBM1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>承包经营权证编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="name" id="CBJYQZBM1" data-options="readonly:true"></td>
+
+                                    <td>转出方式：</td>
+                                    <td>
+                                        <select class="easyui-combobox gunli"  data-options="readonly:true" id="LZFS1">
+                                            <option value="100">承包</option>
+                                            <option value="110">家庭承包</option>
+                                            <option value="120">其他方式承包</option>
+                                            <option value="121">招标</option>
+                                            <option value="122">拍卖</option>
+                                            <option value="123">公开协商</option>
+                                            <option value="129">其他方式(129)</option>
+                                            <option value="200">转让</option>
+                                            <option value="300">互换</option>
+                                            <option value="900">其他方式(900)</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>流转期限开始日期：</td>
+                                    <td>
+                                        <input class="easyui-datebox gunli" id="LZQXKSRQ1" data-options="formatter:myformatter,parser:myparser,readonly:true">
+                                    </td>
+
+                                    <td>流转期限结束日期：</td>
+                                    <td>
+                                        <input class="easyui-datebox gunli" id="LZQXJSRQ1" data-options="formatter:myformatter,parser:myparser,readonly:true">
+                                    </td>
+                                </tr>
+                                <script type="text/javascript">
+                                    function myformatter(date) {
+                                        var y = date.getFullYear();
+                                        var m = date.getMonth() + 1;
+                                        var d = date.getDate();
+                                        return y + '-' + (m < 10 ? ('0' + m) : m) + '-' + (d < 10 ? ('0' + d) : d);
+                                    }
+                                    function myparser(s) {
+                                        if (!s) return new Date();
+                                        var ss = (s.split('-'));
+                                        var y = parseInt(ss[0], 10);
+                                        var m = parseInt(ss[1], 10);
+                                        var d = parseInt(ss[2], 10);
+                                        if (!isNaN(y) && !isNaN(m) && !isNaN(d)) {
+                                            return new Date(y, m - 1, d);
+                                        } else {
+                                            return new Date();
+                                        }
+                                    }
+                                </script>
+                                <tr>
+                                    <td>流转期限：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="subject" id="LZQX1" data-options="readonly:true"></td>
+
+                                    <td>流转价格：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="name" id="LZJG1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>合同签订日期:</td>
+                                    <td>
+                                        <input class="easyui-datebox gunli" id="HTQDRQ1" data-options="formatter:myformatter,parser:myparser,readonly:true">
+                                    </td>
+
+                                    <td>流转合同编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="subject" id="LZHTBM1" data-options="readonly:true"></td>
+                                </tr>
+                                <tr>
+                                    <td>受让方编码：</td>
+                                    <td><input class="easyui-textbox gunli" type="text" name="name" id="SRFBM1" data-options="readonly:true"></td>
+
+                                </tr>
+                            </table>
+                        </form>
+                    </div>
+                </div>
+                <div id="mapDiv" style="position:absolute;z-index:3;width:100%;height:100%;display:none"></div>
+                <div id="tongji" style="position:absolute;z-index:1;width:100%;height:100%;display:none">
+                    <div style="width:50%;float:left">
+                        <div id="pieArea" style="width: 100%; height: 300px; margin: 0 0 0 0"></div>
+                    </div>
+                    <div style="width:50%;float:left">
+                        <div id="piePerson" style="width: 100%; height: 300px; margin: 0 0 0 0"></div>
+                    </div>
+                    <br />
+                    <div >
+                        <input class="easyui-textbox" style="width:200px" type="text" name="name" id="cjbm" data-options="required:true" value="371621104220"><input class="easyui-textbox" style="width:200px" type="text" name="name" id="size" value="5000" data-options="required:true"></input><a class="easyui-linkbutton" id="btn_dahu">查询</a><a href="javascript:void(0)" class="easyui-linkbutton" onclick="openwin()">Open</a>
+                        <div id="w" class="easyui-window" title="地块详情" data-options="modal:true,closed:true,iconCls:'icon-save'" style="width:1000px;height:500px;padding:0;">
+                        </div>
+                        <table class="mytable" id="tableDahu" style="width:100%" cellspacing="0" summary="The technical specifications of the Apple PowerMac G5 series">
+                            <tr><th scope="row" abbr="Model" class="spec">承包方编码 </th><th scope="row" abbr="Model" class="spec">承包人姓名 </th><th scope="row" abbr="Model" class="spec">承包面积</th><th scope="row" abbr="Model" class="spec">承包地块数 </th><th scope="row" abbr="Model" class="spec"> 地块查看</th></tr>
+                            
+                        </table>
+                    </div>
+                    
+                </div>
+                <div id="fabu" style="position:absolute;z-index:1;width:100%;height:100%;display:none">
+                   
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        
+                                    $.ajax({
+                                        type: "post",
+                                        url: "../business/getLiuzhuanByReporter.ashx",
+                                        datatype: "json",
+                                        success: function (data) {
+                                            if (data != "" && data != null) {
+                                                var obj_groups = eval(data);
+                                                for (var i = 0; i < obj_groups.length; i++) {
+                                                    $('#tableReporter').append(" <tr onclick=\"search('" + obj_groups[i].DKBM + "')\"><th scope= \"row\" abbr= \"Model\" class=\"spec\" > " + obj_groups[i].DKBM + "</th ></tr >");
+                                                }
+                                            } else {
+                                                alert("no");
+                                            }
+                                        }
+                                    });
+                                    function search(dkbm) {
+                                        $.ajax({
+                                            type: "post",
+                                            url: "../business/getLiuzhuanData.ashx",
+                                            datatype: "json",
+                                            data: { DKBM: dkbm },
+                                            success: function (data) {
+                                                if (data != "" && data != null) {
+                                                    json = eval(data);
+                                                    $('#DKBM1').textbox('setValue', json[0].DKBM); 
+                                                    $('#DKLB1').textbox('setValue', json[0].DKLB); 
+                                                    $('#DLDJ1').textbox('setValue', json[0].DLDJ); 
+                                                    $('#TDYT1').textbox('setValue', json[0].TDYT); 
+                                                    $('#CBMJ1').textbox('setValue', json[0].CBMJ); 
+                                                    $('#SCMJ1').textbox('setValue', json[0].SCMJ); 
+                                                    $('#FBFBM1').textbox('setValue', json[0].FBFBM); 
+                                                    $('#ZCFBM1').textbox('setValue', json[0].ZCFBM); 
+                                                    $('#CBJYQZBM1').textbox('setValue', json[0].CBJYQZBM); 
+                                                    jsSelectItemByValue(document.getElementById("LZFS1"), json[0].LZFS); 
+                                                    $('#LZFS1').combobox("setValues", json[0].LZFS);
+                                                    $('#LZQXKSRQ1').textbox('setValue', json[0].LZQXKSRQ.split('\n')[0]);
+                                                    $('#LZQXJSRQ1').textbox('setValue', json[0].LZQXJSRQ);
+                                                    $('#LZQX1').textbox('setValue', json[0].LZQX);
+                                                    $('#LZJG1').textbox('setValue', json[0].LZJG); 
+                                                    $('#HTQDRQ1').textbox('setValue', json[0].HTQDRQ);
+                                                    $('#LZHTBM1').textbox('setValue', json[0].LZHTBM);
+                                                    $('#SRFBM1').textbox('setValue', json[0].SRFBM); 
+
+                                                } else {
+                                                    alert("no");
+                                                }
+                                            }
+                                        });
+                                    }
+                                    function jsSelectItemByValue(objSelect, objItemText) {
+                                        for (var i = 0; i < objSelect.options.length; i++) {
+                                            if (objSelect.options[i].value == objItemText) {
+                                                objSelect.options[i].selected = true;
+                                                break;
+                                            }
+                                        }
+                                    }    
+                                    $('#btn_dahu').click(function () {
+                                        $.ajax({
+                                            type: "post",
+                                            url: "../business/getBigCBFBM.ashx",
+                                            datatype: "json",
+                                            data: {
+                                                cjbm: $('#cjbm').val(),
+                                                size: $("#size").val()
+                                            },
+                                            success: function (data) {
+                                                var obj = eval(data);
+                                                for (var i = 0; i < obj.length; i++)
+                                                {
+                                                    $('#tableDahu').append(" <tr><th scope= \"row\" abbr= \"Model\" class=\"spec\" > " + obj[i].CBFBM + "</th ><th scope= \"row\" abbr= \"Model\" class=\"spec\" > " + obj[i].CBFXM + "</th ><th scope= \"row\" abbr= \"Model\" class=\"spec\" > " + obj[i].CBMJ + "</th ><th scope= \"row\" abbr= \"Model\" class=\"spec\" > " + obj[i].CBC + "</th ><th onclick=\"find('" + obj[i].CBFBM + "')\" scope= \"row\" abbr= \"Model\" class=\"spec\" >查看</th ></tr >");
+
+                                                }
+                                            }
+                                        });
+                                    });
+
+                                    //显示大户地块
+                                    function find(ll) {
+                                        
+                                    }
+
+
+    </script>
+    <script>
+
+                                $("#btn_post").bind("click", function () {
+                                    var liuZhuanInfo = {
+                                        DKBM: $("#DKBM").val().trim(),
+                                        DKLB: $("#DKLB").val().trim(),
+                                        DLDJ: $("#DLDJ").val().trim(),
+                                        TDYT: $("#TDYT").val().trim(),
+                                        CBMJ: $("#CBMJ").val().trim(),
+                                        SCMJ: $("#SCMJ").val().trim(),
+                                        FBFBM: $("#FBFBM").val().trim(),
+                                        ZCFBM: $("#ZCFBM").val().trim(),
+                                        CBJYQZBM: $("#CBJYQZBM").val().trim(),
+                                        LZFS: $("#LZFS option:selected").val().trim(),
+                                        LZQXKSRQ: $("#LZQXKSRQ").val().trim(),
+                                        LZQXJSRQ: $("#LZQXJSRQ").val().trim(),
+                                        LZQX: $("#LZQX").val().trim(),
+                                        LZJG: $("#LZJG").val().trim(),
+                                        HTQDRQ: $("#HTQDRQ").val().trim(),
+                                        LZHTBM: $("#LZHTBM").val().trim(),
+                                        SRFBM: $("#SRFBM").val().trim()
+                                    };
+                                    $.ajax({
+                                        type: "post",
+                                        url: "../business/addLiuzhunInfo.ashx",
+                                        data: { dataInfo: JSON.stringify(liuZhuanInfo) },
+                                        datatype: "json",
+                                        success: function (data) {
+                                            alert(data);
+                                        }
+                                    });
+                                });
+
+
+
+
+
+    </script>
+    <script>
+
+    </script>
+   
+    <script src="js/tongji.js"></script>
+</body>
+
+
+</html>

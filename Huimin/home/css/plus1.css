@@ -1,0 +1,14 @@
+.apply{width:950px;margin:0px 0px 10px 0px; _position: relative;}
+.apply_array{border:#cdcdcd 1px solid;padding:16px;width:110px;float:left;height:140px;margin-right:32px;}
+.apply_array .vote{position:absolute;line-height:26px;margin-top:10px;padding-left:29px;width:83px;display:block;background:url(../images/vote.gif) no-repeat 0px 0px;height:26px;color:#282828;margin-left:-6px;text-decoration:none;}
+.apply_last{margin-right:0px}
+.apply_img{text-align:center;width:110px;display:table-cell;background:#e2e2e2;height:100px;font-size:95px;vertical-align:middle}
+.apply_array a{text-decoration:underline}
+.apply_array a:hover{color:#e01111}
+.apply_info{text-align:center;padding:15px;}
+.apply_comment{text-align:center}
+.apply_info a{line-height:17px;font-weight:700}
+.apply_nav{position:relative;width:850px;float:left;height:195px;overflow:hidden}
+.apply_w{position:absolute;margin-top:0px;width:1000px;float:left;left:0px}
+.apply .img_l{padding:70px 12px 0 12px;float:left;cursor:pointer;}
+.apply .img_r{padding:70px 12px 0 12px;float:left;cursor:pointer; _position: absolute; _right: -10px; _top: 0px;}

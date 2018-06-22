@@ -1,0 +1,246 @@
+/* 为了让ie浏览器居中显示内容 */
+body {
+	text-align: center;
+	background: url(../images/header_bg.jpg) repeat-x 0 0;
+}
+.main {
+	text-align: left;
+	width: 958px;
+	margin: 0 auto;
+}
+/* 头部样式 */
+.header {
+	height: 87px;
+	background: url(../images/header.jpg) no-repeat;
+	position: relative;
+}
+.help {
+	position: absolute;
+	right: 10px;
+	bottom: 10px;
+	color: #fff;
+}
+.help a {
+	color: #fff;
+	text-decoration: none;
+}
+.help a:hover {
+	text-decoration: underline;
+}
+/* 导航条样式 */
+.topbar {
+	height: 42px;
+	line-height: 42px;
+	color:#F0A13B;
+	font-size: 14px;
+	font-weight: bold;
+}
+.topbar ul li {
+	display: inline;
+	padding: 12px 20px;
+}
+.topbar ul li a:hover {
+	color: #0154a4;
+	text-decoration: none;
+}	
+/* 通知信息样式 */
+.notice {
+	height: 23px;
+	line-height: 23px;
+	background: url(../images/notice.jpg) repeat-x;
+}
+.notice p {
+	background: url(../images/left_logo.jpg) 0px 8px no-repeat;
+	padding-left: 10px;
+	margin-left: 10px;
+}
+.notice a:hover {
+	text-decoration: none;
+}
+.more {
+	color: #0253a5;
+}
+.main_visual {
+	margin-top: 10px;
+}
+/* 下面信息框 */
+.message {
+	margin-top: 20px;
+}
+.left {
+	float: left;
+	width: 465px;
+	margin-right: 10px;
+	margin-bottom: 10px;
+	_margin-bottom: 0px;
+}
+.left_m {
+	width: 465px;
+	border: 1px solid #aaa;
+	height: 185px;
+}
+.right {
+	float: right;
+	width: 465px;
+	margin-left: 10px;
+	margin-bottom: 10px;
+	_margin-bottom: 0px;
+}
+.right_m {
+	width: 465px;
+	border: 1px solid #aaa;
+	height: 185px;
+}
+.shadow {
+	text-align: center;
+}
+.clear {
+	clear: both;
+}
+
+.footer {
+	height: 60px;
+	line-height: 60px;
+	background: url(../images/footer.jpg) repeat-x;
+	color: #fff;
+}
+.footer p {
+	text-align: center;
+	line-height: 20px;
+}
+.address {
+	padding-top: 15px;
+}
+
+.one_left {
+	margin: 5px;
+}
+.float_right {
+	float: right;
+	margin-top: 15px;
+	margin-right: 10px;
+}
+.left_ul {
+	margin: 10px;
+	margin-top: 0px;
+}
+.left_ul li {
+	padding-left: 10px;
+	margin-left: 10px;
+	background: url(../images/left_logo.jpg) no-repeat 0px 10px;
+	border-bottom: 1px dotted #aaa;
+	height: 30px;
+	line-height: 30px;
+}
+.left_ul li a {
+	*float: left;
+}
+.left_ul .li_click_y {
+	background: url(../images/left_logo_click.jpg) no-repeat 0px 10px;
+}
+.left_ul .li_click_b {
+	background: url(../images/left_logo_b.jpg) no-repeat 0px 10px;
+}
+.left_ul .li_click_y a {
+	color: #f18612;
+}
+.left_ul .li_click_b a {
+	color: #0153a5;
+}	
+.right_time {
+	float: right;
+	margin-right: 10px;
+}
+
+.login {
+	margin-top: 15px;
+	margin-left: 40px;
+	margin-bottom: 10px;
+}
+.login table td {
+	height: 35px;
+	line-height: 35px;
+}
+.username,
+.password {
+	border: 1px solid #aaa;
+	height: 20px;
+	line-height: 20px;
+	width: 200px;
+}
+.user {
+	background: url(../images/username.jpg) no-repeat 0px 8px;
+}
+.pass {
+	background: url(../images/password.jpg) no-repeat 0px 8px;
+}
+.user, .pass {
+	color: #555;
+	font-size: 14px;
+	padding-left: 20px;
+	
+}	
+.sub, 
+.res {
+	width: 50px;
+	height: 20px;
+	line-height: 20px;
+	border: 1px solid #aaa;
+	_border: none;
+	background: url(../images/button_bg.jpg) repeat-x;
+}
+.forget {
+	margin-left: 10px;
+	color: #0153a5;
+}
+.clicked {
+	color: #0153a5;
+}	
+
+/* 精品页面css */
+.bar {
+	margin: 10px 0px;
+	border: 1px solid #aaa;
+	height: 113px;
+	overflow: hidden;
+}
+.details {
+	margin-bottom: 10px;
+}
+.d_left {
+	float: left;
+	width: 313px;	
+}
+.d_left_top {
+	width: 313px;
+	border: 1px solid #aaa;
+}
+.d_right {
+	float: right; 
+	width: 623px;
+}
+.d_right_top {
+	width: 623px;
+	border: 1px solid #aaa;
+}
+
+/* 关于我们页面样式 */
+.int {
+	border: 1px solid #aaa;
+	margin-bottom: 20px;
+}
+.int_title {
+	height: 30px;
+	line-height: 30px;
+	background: #0550a3;
+}
+.int_con p {
+	text-indent: 2em;
+	line-height: 30px;
+	font-size: 14px;
+	margin: 10px 20px;
+}
+.t_c {
+	text-align: center;
+	margin: 10px;
+}

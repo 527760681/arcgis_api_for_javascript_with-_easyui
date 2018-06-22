@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+    <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" />
+    <style>
+        .table tr td {
+            border: none !important;
+        }
+    </style>
+
+    <title></title>
+</head>
+<body>
+    <form class="form-inline">
+        <div class="form-group input-sm">
+            <label for="exampleInputName2">地块编码：</label>
+            <input type="text" class="form-control input-sm" id="DKBM" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">地块类别：</label>
+            <input type="email" class="form-control input-sm" id="DKLB" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputName2">地力等级：</label>
+            <input type="text" class="form-control input-sm" id="DLDJ" />
+        </div>
+        <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2 input-sm">土地用途：</label>
+            <input type="email" class="form-control input-sm" id="TDYT" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">承包面积（m^2）：</label>
+            <input type="email" class="form-control input-sm" id="CBMJ" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">实测面积（m^2）：</label>
+            <input type="email" class="form-control input-sm" id="SCMJ" />
+        </div>
+        <br />
+
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">发包方编码：</label>
+            <input type="email" class="form-control input-sm" id="FBFBM" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">转出方编码：</label>
+            <input type="email" class="form-control input-sm" id="ZCFBM" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">承包经营权证编码：</label>
+            <input type="email" class="form-control input-sm" id="CBJYQZBM" />
+        </div>
+        <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">转出方式：</label>
+            <select name="Correct Class" id="LZFS" class="form-control input-sm" >
+                <option value="100">承包</option>
+                <option value="110">家庭承包</option>
+                <option value="120">其他方式承包</option>
+                <option value="121">招标</option>
+                <option value="122">拍卖</option>
+                <option value="123">公开协商</option>
+                <option value="129">其他方式(129)</option>
+                <option value="200">转让</option>
+                <option value="300">互换</option>
+                <option value="900">其他方式(900)</option>
+            </select>
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">流转期限开始日期：</label>
+            <input type="email" class="form-control input-sm" id="LZQXKSRQ" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">流转期限结束日期：</label>
+            <input type="email" class="form-control input-sm" id="LZQXJSRQ" />
+        </div>
+        <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">流转期限：</label>
+            <input type="email" class="form-control input-sm" id="LZQX" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">流转价格：</label>
+            <input type="email" class="form-control input-sm" id="LZJG" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">合同签订日期:</label>
+            <input type="email" class="form-control input-sm" id="HTQDRQ" />
+        </div>
+        <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">流转合同编码：</label>
+            <input type="email" class="form-control input-sm" id="LZHTBM" />
+        </div>
+         <br />
+        <div class="form-group input-sm">
+            <label for="exampleInputEmail2">受让方编码：</label>
+            <input type="email" class="form-control input-sm" id="SRFBM" />
+        </div>
+        <br />
+    </form>
+     <br />
+    <button type="button" id="btn_post">提交</button>
+    <button type="button" id="btn_getDataByDKBM">通过地块编码获取数据</button>
+      <button type="button" id="btn_getDataByReporter">通过录入员姓名获取自己数据</button>
+     <button type="button" id="btn_getDKBM">获取全部编码</button>
+</body>
+
+
+<script src="js/jquery-2.1.4.min.js"></script>
+
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="js/bootstrap-datetimepicker.js"></script>
+<script src="js/bootstrap-datetimepicker.zh-CN.js"></script>
+<script src="js/jquery-form.js"></script>
+<script>
+    //日历控件
+    $('#LZQXKSRQ').datetimepicker({
+        minView: "month", //选择日期后，不会再跳转去选择时分秒 
+        format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+        language: 'zh-CN', //汉化 
+        autoclose: true //选择日期后自动关闭 
+    });
+    $('#LZQXJSRQ').datetimepicker({
+        minView: "month", //选择日期后，不会再跳转去选择时分秒 
+        format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+        language: 'zh-CN', //汉化 
+        autoclose: true //选择日期后自动关闭 
+    });
+    $('#HTQDRQ').datetimepicker({
+        minView: "month", //选择日期后，不会再跳转去选择时分秒 
+        format: "yyyy-mm-dd", //选择日期后，文本框显示的日期格式 
+        language: 'zh-CN', //汉化 
+        autoclose: true //选择日期后自动关闭 
+    });
+    $("#btn_post").bind("click", function () {
+        var liuZhuanInfo = {
+            DKBM: $("#DKBM").val().trim(),
+            DKLB: $("#DKLB").val().trim(),
+            DLDJ: $("#DLDJ").val().trim(),
+            TDYT: $("#TDYT").val().trim(),
+            CBMJ: $("#CBMJ").val().trim(),
+            SCMJ: $("#SCMJ").val().trim(),
+            FBFBM: $("#FBFBM").val().trim(),
+            ZCFBM: $("#ZCFBM").val().trim(),
+            CBJYQZBM: $("#CBJYQZBM").val().trim(),
+            LZFS: $("#LZFS option:selected").val().trim(),
+            LZQXKSRQ: $("#LZQXKSRQ").val().trim(),
+            LZQXJSRQ: $("#LZQXJSRQ").val().trim(),
+            LZQX: $("#LZQX").val().trim(),
+            LZJG: $("#LZJG").val().trim(),
+            HTQDRQ: $("#HTQDRQ").val().trim(),
+            LZHTBM: $("#LZHTBM").val().trim(),
+            SRFBM: $("#SRFBM").val().trim()
+        };
+        $.ajax({
+            type: "post",
+            url: "business/addLiuzhunInfo.ashx",
+            data: { dataInfo: JSON.stringify(liuZhuanInfo) },
+            datatype: "json",
+            success: function (data) {
+                alert(data);
+            }
+        });
+    });
+    $("#btn_getDataByDKBM").bind("click", function () {
+        $.ajax({
+            type: "post",
+            url: "business/getLiuzhuanData.ashx",
+            datatype: "json",
+            data: { DKBM: "3716211042200000446" },
+            success: function (data) {
+                if (data != "" && data != null) {
+                    console.log(data);
+                } else {
+                    alert("no");
+                }
+            }
+        });
+
+    });
+
+    $("#btn_getDataByReporter").bind("click", function () {
+        $.ajax({
+            type: "post",
+            url: "business/getLiuzhuanByReporter.ashx",
+            datatype: "json",
+            success: function (data) {
+                if (data != "" && data != null) {
+                    console.log(data);
+                } else {
+                    alert("no");
+                }
+            }
+        });
+
+    });
+
+    $("#btn_getDKBM").bind("click", function () {
+        $.ajax({
+            type: "post",
+            url: "business/getLiuzhuanDKBM.ashx",
+            datatype: "json",
+            success: function (data) {
+                if (data != "" && data != null) {
+                    alert(data);
+                    
+                } else {
+                    alert("no");
+                }
+            }
+        });
+
+    });
+
+</script>
+</html>

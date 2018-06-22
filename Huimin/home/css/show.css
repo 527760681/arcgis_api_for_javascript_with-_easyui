@@ -1,0 +1,7 @@
+@charset "utf-8";
+/* pic-list */
+.scrollbox{width:956px;margin:0px auto 0 auto;}
+.pic-list{height:164px;overflow:hidden;border-bottom:solid 1px #fff;position:relative;}
+.pic-list ul{position:absolute;left:0px;top:0px;}
+.pic-list .picture{float:left;width:159px;height:164px;border-right:solid 1px #fff;position:relative;background:#eee;overflow: hidden;}
+.pic-list .picture em{display:inline-block;background:#000;opacity:0.75;filter:alpha(opacity:75);color:#fff;padding:0px 5px;height:20px;line-height:20px;position:absolute;right:0px;bottom:0px;text-decoration:none;}
